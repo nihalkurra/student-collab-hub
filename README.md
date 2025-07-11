@@ -4,6 +4,17 @@ A fullstack web application for students to connect, share academic resources, a
 
 ## 🚀 Features
 
+## 📋 Table of Contents
+- [Features](#-features)
+- [Tech Stack](#️-tech-stack)
+- [Installation & Setup](#-installation--setup)
+- [API Documentation](#-backend-connection-guide)
+- [Deployment](#-deployment)
+- [Contributing](#-contributing)
+- [License](#-license)
+
+## 🚀 Features
+
 ### User Management
 - **User Registration & Authentication**: Secure JWT-based authentication
 - **User Profiles**: Complete profiles with university, major, year, and bio
@@ -198,6 +209,87 @@ The application will be available at:
   comments: [Comment IDs],
   views: Number,
   isPublic: Boolean,
+  attachments: [String],
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+
+#### Comment Model
+```javascript
+{
+  author: User ID,
+  post: Post ID,
+  parentComment: Comment ID (for replies),
+  content: String,
+  likes: [User IDs],
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+
+## 🚀 Deployment
+
+### Frontend Deployment (Netlify)
+
+1. **Build the React app:**
+   ```bash
+   cd client
+   npm run build
+   ```
+
+2. **Deploy to Netlify:**
+   - Connect your GitHub repository to Netlify
+   - Set build command: `cd client && npm install && npm run build`
+   - Set publish directory: `client/build`
+   - Add environment variables for your backend URL
+
+### Backend Deployment (Render/Railway/Heroku)
+
+1. **Prepare for deployment:**
+   - Update CORS settings to allow your frontend domain
+   - Set environment variables (MONGODB_URI, JWT_SECRET, etc.)
+   - Ensure all dependencies are in package.json
+
+2. **Deploy to your preferred platform:**
+   - **Render**: Connect GitHub repo, set build command: `npm install`
+   - **Railway**: Connect GitHub repo, auto-detects Node.js
+   - **Heroku**: Connect GitHub repo, set buildpacks
+
+3. **Update frontend API URLs:**
+   - Replace `http://localhost:5001` with your deployed backend URL
+
+### Environment Variables for Production
+
+```env
+# Backend (.env)
+PORT=5000
+NODE_ENV=production
+MONGODB_URI=your-mongodb-atlas-uri
+JWT_SECRET=your-production-jwt-secret
+CLOUDINARY_CLOUD_NAME=your-cloudinary-cloud-name
+CLOUDINARY_API_KEY=your-cloudinary-api-key
+CLOUDINARY_API_SECRET=your-cloudinary-api-secret
+
+# Frontend (Netlify environment variables)
+REACT_APP_API_URL=https://your-backend-url.com
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+**Made with ❤️ for students everywhere**
   jobDetails: Object (for job posts),
   noteDetails: Object (for note posts)
 }
